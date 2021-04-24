@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +11,7 @@ class CustomDio {
   CustomDio.withAuthentication() {
     _dio = Dio();
     _dio.interceptors.add(InterceptorsWrapper(
-        onRequest: _onRequest, onError: _onError, onResponse: _onResponse));
+        onRequest: _onRequest, onResponse: _onResponse, onError: _onError));
   }
 
   Dio get instance => _dio;
@@ -23,9 +22,9 @@ class CustomDio {
     options.headers['Authorization'] = token;
   }
 
-  _onResponse(Response r) {
+  _onResponse(Response e) {
     print('##################');
-    print(r.data);
+    print(e.data);
     print('##################');
   }
 
